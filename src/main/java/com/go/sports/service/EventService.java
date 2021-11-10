@@ -1,12 +1,16 @@
 package com.go.sports.service;
 
+import com.go.sports.dto.mapper.EventMapper;
+import com.go.sports.dto.request.EventDTO;
 import com.go.sports.entity.Event;
+import com.go.sports.exception.EventNotFoundException;
 import com.go.sports.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EventService {
@@ -18,22 +22,31 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public List<Event> getAllEvents(){
-        return eventRepository.findAll();
+    public List<EventDTO> getAllEvents(){
+        List<Event> events = eventRepository.findAll();
+        return events.stream().map(EventMapper::toDTO).collect(Collectors.toList());
     }
 
 
-    public Optional<Event> getEventById(String id) {
-        return  eventRepository.findById(id);
+    public EventDTO getEventById(String id) throws EventNotFoundException {
+        Event event =  getEventFindById(id);
+          return EventMapper.toDTO(event);
     }
 
-    public Event createEvent(Event event) {
-        return eventRepository.save(event);
+    public EventDTO createEvent(EventDTO eventDTO) {
+        Event event =  eventRepository.save(EventMapper.toModel(eventDTO));
+        return EventMapper.toDTO(event);
     }
 
-    public void deleteEvent(String id) {
+    public void deleteEvent(String id) throws EventNotFoundException {
+        getEventFindById(id);
         Event event = new Event();
         event.setId(id);
         eventRepository.delete(event);
+    }
+
+    private Event getEventFindById(String id) throws EventNotFoundException {
+        Event event =  eventRepository.findById(id).orElseThrow(() -> new EventNotFoundException(id));
+        return  event;
     }
 }

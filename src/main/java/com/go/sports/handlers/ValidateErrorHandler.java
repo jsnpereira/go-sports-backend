@@ -1,7 +1,7 @@
 package com.go.sports.handlers;
 
-import com.go.sports.handlers.dto.ErrorExceptionMessageDTO;
-import com.go.sports.handlers.dto.ErrorValidMessageDTO;
+import com.go.sports.handlers.message.ErrorExceptionMessageDTO;
+import com.go.sports.handlers.message.ErrorValidMessageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;

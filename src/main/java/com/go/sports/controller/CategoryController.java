@@ -1,15 +1,16 @@
 package com.go.sports.controller;
 
-import com.go.sports.dto.CategoryDTO;
-import com.go.sports.entity.Category;
-import com.go.sports.entity.Event;
+import com.go.sports.dto.request.CategoryDTO;
 import com.go.sports.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/category")
@@ -22,20 +23,19 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/{event_id}")
-    public ResponseEntity<List<CategoryDTO>> getCategoriesByEvent(@PathVariable("event_id") String eventId) {
-        List<Category> categories = categoryService.getCategoryByEventId(eventId);
-        return ResponseEntity.ok(CategoryDTO.converter(categories));
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<CategoryDTO> getAllCategories() {
+        List<CategoryDTO> categories;
+        categories = categoryService.getAllCategory();
+        return categories;
     }
 
-    @GetMapping
-    public ResponseEntity<List<CategoryDTO>> getAllCategories(@RequestParam(name = "eventId", defaultValue = "") String eventId) {
-        List<Category> categories;
-        if (eventId.isBlank() || eventId.isEmpty()) {
-            categories = categoryService.getAllCategory();
-        } else {
-            categories = categoryService.getCategoryByEventId(eventId);
-        }
-        return ResponseEntity.ok(CategoryDTO.converter(categories));
+    @GetMapping("/event/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CategoryDTO> getCategoriesByEvent(@PathVariable(name = "id") String eventId) {
+        List<CategoryDTO> categories;
+        categories = categoryService.getCategoryByEventId(eventId);
+        return categories;
     }
 }

@@ -1,6 +1,6 @@
 package com.go.sports.entity;
 
-import com.go.sports.dto.CategoryDTO;
+import com.go.sports.dto.request.CategoryDTO;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -18,7 +18,7 @@ public class Category {
     private String title;
     private String description;
     @ManyToOne
-    @JoinColumn(name = "event_id")
+   @JoinColumn(name = "fk_event_id")
     private Event event;
 
     public Category(CategoryDTO categoryDTO) {

@@ -1,4 +1,4 @@
-package com.go.sports.dto;
+package com.go.sports.dto.request;
 
 import com.go.sports.entity.Category;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.go.sports.handlers.dto;
+package com.go.sports.handlers.message;
 
 import lombok.Getter;
 import lombok.Setter;
