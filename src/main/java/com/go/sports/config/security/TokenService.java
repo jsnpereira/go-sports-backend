@@ -1,6 +1,7 @@
 package com.go.sports.config.security;
 
 import com.go.sports.entity.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +16,7 @@ public class TokenService {
     @Value("${security.jwt.expiration}")
     private String expiration;
 
-    @Value("${security.jwt.secret")
+    @Value("${security.jwt.secret}")
     private String secret;
 
     public String getToken(Authentication authentication){
@@ -28,5 +29,19 @@ public class TokenService {
                 .setExpiration(dateExpiration)
                 .signWith(SignatureAlgorithm.HS256,secret)
                 .compact();
+    }
+
+    public String getUserId(String token) {
+        Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
+        return claims.getSubject().toString();
+    }
+
+    public boolean isTokenValidated(String token){
+        try {
+            Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 }
