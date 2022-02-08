@@ -1,12 +1,9 @@
 package com.go.sports.controller;
 
 import com.go.sports.dto.request.CategoryDTO;
+import com.go.sports.exception.CategoryNotFoundException;
 import com.go.sports.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,4 +35,10 @@ public class CategoryController {
         categories = categoryService.getCategoryByEventId(eventId);
         return categories;
     }
+
+//    @DeleteMapping("/{id}")
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    public void deleteCategory(@PathVariable(name = "id") String categoryId) throws CategoryNotFoundException {
+//        categoryService.deleteCategory(categoryId);
+//    }
 }

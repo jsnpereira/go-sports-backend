@@ -27,10 +27,8 @@ public class EventService {
         return events.stream().map(EventMapper::toDTO).collect(Collectors.toList());
     }
 
-
     public EventDTO getEventById(String id) throws EventNotFoundException {
-        Event event =  getEventFindById(id);
-          return EventMapper.toDTO(event);
+          return EventMapper.toDTO(getEventFindById(id).get());
     }
 
     public EventDTO createEvent(EventDTO eventDTO) {
@@ -39,14 +37,13 @@ public class EventService {
     }
 
     public void deleteEvent(String id) throws EventNotFoundException {
-        getEventFindById(id);
-        Event event = new Event();
-        event.setId(id);
-        eventRepository.delete(event);
+       Optional<Event> event = getEventFindById(id);
+       if(event.isPresent()){
+           eventRepository.delete(event.get());
+       }
     }
 
-    private Event getEventFindById(String id) throws EventNotFoundException {
-        Event event =  eventRepository.findById(id).orElseThrow(() -> new EventNotFoundException(id));
-        return  event;
+    private Optional<Event> getEventFindById(String id) throws EventNotFoundException {
+        return  Optional.ofNullable(eventRepository.findById(id).orElseThrow(() -> new EventNotFoundException(id)));
     }
 }
