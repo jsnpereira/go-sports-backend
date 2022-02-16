@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class EventController {
     @DeleteMapping("/{id}")
     @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
-//    @CacheEvict(value = "EventsList", allEntries = true)
+    @CacheEvict(value = "EventsList", allEntries = true)
     public void deleteEvent(@PathVariable("id") String id) throws EventNotFoundException {
         eventService.deleteEvent(id);
     }
