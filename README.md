@@ -20,3 +20,7 @@ We can access swagger ui -> http://localhost:8080/swagger-ui.html
 
 Reference: 
 
+#Docker
+
+docker run -p 8080:8080 -e FORUM_DATABASE_URL='jdbc:h2:mem:alura-forum' -e FORUM_DATABASE_USERNAME='sa' -e FORUM_DATABASE_PASSWORD='' -e FORUM_JWT_SECRET='123456' alura/forum
+
