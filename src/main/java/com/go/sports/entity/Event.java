@@ -1,6 +1,7 @@
 package com.go.sports.entity;
 
 import com.go.sports.enums.EventType;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -8,7 +9,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.List;
 
-
+@Data
 @Entity
 @Table(name = "events")
 @Setter
