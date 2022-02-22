@@ -24,3 +24,33 @@ Reference:
 
 docker run -p 8080:8080 -e FORUM_DATABASE_URL='jdbc:h2:mem:alura-forum' -e FORUM_DATABASE_USERNAME='sa' -e FORUM_DATABASE_PASSWORD='' -e FORUM_JWT_SECRET='123456' alura/forum
 
+## Fun to deploy the app in Heroku cloud
+
+1. It should create new application 
+  ````
+  heroku create go-sports-backend
+  ````
+2. Add the project for git from heroku
+ ````
+ heroku git:remote –a go-sports-backend
+  ````
+3. Login the keroku container
+ ````
+ heroku container:login
+  ````
+4. Push the container (Dockerfile file) to cloud
+ ````
+ heroku container:push web  
+  ````
+ ````
+ heroku container:release web
+  ````
+4. Check the log from the application
+ ````
+   heroku logs --tail
+ ````
+5. Open the application
+ ````
+   heroku open
+ ````
+
