@@ -18,11 +18,6 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-//    @GetMapping
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<UserDTO> getAllUsers(){
-//
-//    }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)

@@ -9,15 +9,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class EventMapper {
+
     public static EventDTO toDTO(Event event) {
+        return toDTO(event, true);
+    }
+
+    public static EventDTO toDTO(Event event,boolean displayCategory) {
         EventDTO eventDTO = new EventDTO();
         eventDTO.setId(event.getId());
         eventDTO.setTitle(event.getTitle());
         eventDTO.setDescription(event.getDescription());
         eventDTO.setEventType(event.getEventType());
-        List<CategoryDTO> categories = event.getCategories().stream()
-                .map(CategoryMapper::toDTO).collect(Collectors.toList());
-        eventDTO.setCategories(categories);
+        if (displayCategory){
+            List<CategoryDTO> categories = event.getCategories().stream()
+                    .map(CategoryMapper::toDTO).collect(Collectors.toList());
+            eventDTO.setCategories(categories);
+        }
         return eventDTO;
     }
 

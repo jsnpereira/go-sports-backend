@@ -1,6 +1,8 @@
 package com.go.sports.service;
 
-import com.go.sports.dto.request.RegistrationEventDTO;
+import com.go.sports.dto.mapper.RegistrationMapper;
+import com.go.sports.dto.request.RegistrationDTO;
+import com.go.sports.dto.request.RegistrationPostDTO;
 import com.go.sports.entity.Category;
 import com.go.sports.entity.Registration;
 import com.go.sports.entity.User;
@@ -15,7 +17,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class RegistrationService {
@@ -31,7 +35,7 @@ public class RegistrationService {
         this.userRepository = userRepository;
     }
 
-    public void registerEventByUser(RegistrationEventDTO registrationEventDTO) throws CategoryNotFoundException, UserIdNotFoundException {
+    public void registerEventByUser(RegistrationPostDTO registrationEventDTO) throws CategoryNotFoundException, UserIdNotFoundException {
         Optional<Category> category = Optional.ofNullable(categoryRepository.findById(registrationEventDTO.getCategoryId())
                 .orElseThrow(() -> new CategoryNotFoundException(registrationEventDTO.getCategoryId())));
         Optional<User> user = Optional.ofNullable(userRepository.findById(registrationEventDTO.getUserId())
@@ -46,6 +50,17 @@ public class RegistrationService {
             registration.setDate(now);
             registrationRepository.save(registration);
         }
+    }
+
+    public List<RegistrationDTO> getRegisterListByUser(String userId) throws UserIdNotFoundException {
+        Optional<User> user = Optional.ofNullable(userRepository.findById(userId)
+                .orElseThrow(() -> new UserIdNotFoundException(userId)));
+
+        List<Registration> registrations = null;
+        if (user.isPresent()){
+            registrations = registrationRepository.findByUserId(userId);
+        }
+        return registrations.stream().map(RegistrationMapper::toDTO).collect(Collectors.toList());
     }
 
 }

@@ -1,6 +1,7 @@
 package com.go.sports.dto.request;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,4 +18,6 @@ public class CategoryDTO {
     private String title;
     @NotNull @NotEmpty @Size(min = 5, max = 40)
     private  String description;
+    @JsonProperty("event")
+    private EventDTO eventDTO;
 }

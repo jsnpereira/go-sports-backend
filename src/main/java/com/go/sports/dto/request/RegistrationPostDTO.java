@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RegistrationEventDTO {
+public class RegistrationPostDTO {
     private String categoryId;
     private String userId;
 }

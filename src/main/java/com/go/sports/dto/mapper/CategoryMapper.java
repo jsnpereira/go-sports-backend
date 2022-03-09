@@ -1,6 +1,7 @@
 package com.go.sports.dto.mapper;
 
 import com.go.sports.dto.request.CategoryDTO;
+import com.go.sports.dto.request.EventDTO;
 import com.go.sports.entity.Category;
 import org.springframework.data.domain.Page;
 
@@ -19,6 +20,7 @@ public class CategoryMapper {
         categoryDTO.setId(category.getId());
         categoryDTO.setTitle(category.getTitle());
         categoryDTO.setDescription(category.getDescription());
+        categoryDTO.setEventDTO(EventMapper.toDTO(category.getEvent(),false));
         return categoryDTO;
     }
 }
