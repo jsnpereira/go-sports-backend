@@ -1,6 +1,6 @@
 # go-sports-backend
 
-#Sonar
+# Sonar
 First sonar must be run in docker, command below:
 ```
 docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true 
@@ -15,7 +15,7 @@ How pick sonar token, please see the tutorial [click here](https://www.decodingd
 
 OBS: It's need sonar server is up before execute this command
 
-#Swagger UI
+# Swagger UI
 We can access swagger ui -> http://localhost:8080/swagger-ui.html
 
 Reference: 
