@@ -15,7 +15,6 @@ public class EventMapper {
         eventDTO.setTitle(event.getTitle());
         eventDTO.setDescription(event.getDescription());
         eventDTO.setEventType(event.getEventType());
-        System.out.println("Category: "+event.getCategories().size());
         List<CategoryDTO> categories = event.getCategories().stream()
                 .map(CategoryMapper::toDTO).collect(Collectors.toList());
         eventDTO.setCategories(categories);

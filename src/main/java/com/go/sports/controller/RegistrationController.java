@@ -24,7 +24,8 @@ public class RegistrationController {
     }
 
     @PostMapping("/event")
-    public void addEventByRegistration(@RequestBody @Valid RegistrationEventDTO registrationEventDTO) throws CategoryNotFoundException, UserIdNotFoundException {
+    public void addEventByRegistration(@RequestBody @Valid RegistrationEventDTO registrationEventDTO)
+            throws CategoryNotFoundException, UserIdNotFoundException {
         registrationService.registerEventByUser(registrationEventDTO);
     }
 }
