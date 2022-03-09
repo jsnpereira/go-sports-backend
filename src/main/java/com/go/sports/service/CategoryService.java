@@ -41,12 +41,12 @@ public class CategoryService {
 
     public void deleteCategory(String categoryId) throws CategoryNotFoundException {
         Optional<Category> category = getCategoryById(categoryId);
-        if (category.isPresent()){
+        if (category.isPresent()) {
             categoryRepository.delete(category.get());
         }
     }
 
-    private Optional<Category>  getCategoryById(String id) throws CategoryNotFoundException {
+    public Optional<Category> getCategoryById(String id) throws CategoryNotFoundException {
         return Optional.ofNullable(categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id)));
     }
 }

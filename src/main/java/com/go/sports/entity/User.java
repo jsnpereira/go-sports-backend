@@ -24,6 +24,9 @@ public class User implements UserDetails {
     private String email;
     private String password;
 
+    @OneToMany(targetEntity = Registration.class, mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Registration> registrations;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Profile> profiles = new ArrayList<>();
 

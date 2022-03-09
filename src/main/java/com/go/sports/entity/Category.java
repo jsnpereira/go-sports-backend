@@ -12,13 +12,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "categories")
 public class Category {
-    @Id @GeneratedValue(generator =  "uuid")
+    @Id
+    @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String title;
     private String description;
     @ManyToOne
-   @JoinColumn(name = "fk_event_id")
+    @JoinColumn(name = "fk_event_id")
     private Event event;
 
     public Category(CategoryDTO categoryDTO) {
