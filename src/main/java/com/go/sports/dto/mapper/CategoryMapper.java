@@ -21,9 +21,4 @@ public class CategoryMapper {
         categoryDTO.setDescription(category.getDescription());
         return categoryDTO;
     }
-
-    public static Page<CategoryDTO> mapPageToDTO( Page<Category> source){
-        return source.map(CategoryMapper::toDTO);
-    }
-
 }

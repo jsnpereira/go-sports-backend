@@ -4,6 +4,7 @@ import com.go.sports.entity.Category;
 import com.go.sports.entity.Event;
 import com.go.sports.enums.EventType;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 
 @Setter
 @Getter
+@NoArgsConstructor
 public class EventDTO {
     private String id;
     @NotNull
@@ -28,40 +30,4 @@ public class EventDTO {
     @NotNull
     private EventType eventType;
     private List<CategoryDTO> categories;
-
-    public EventDTO(Event event) {
-        this.id = event.getId();
-        this.title = event.getTitle();
-        this.description = event.getDescription();
-        this.eventType = event.getEventType();
-    }
-
-    public EventDTO() {
-    }
-
-    public static List<EventDTO> converter(List<Event> events) {
-        return events.stream().map(EventDTO::new).collect(Collectors.toList());
-    }
-
-    public Event convertToEntity() {
-        Event event = new Event();
-        event.setEventType(this.eventType);
-        event.setDescription(this.description);
-        event.setTitle(this.title);
-
-        List<Category> list = categories.stream().map((ca) -> new Category(ca)).collect(Collectors.toList());
-        list.stream().forEach(s -> {
-            s.setEvent(event);
-        });
-        event.setCategories(list);
-        return event;
-    }
-
-    private List<Category> setupCategoryListFromDTO(List<CategoryDTO> categories, Event event) {
-        List<Category> list = categories.stream().map((ca) -> new Category(ca)).collect(Collectors.toList());
-        list.stream().forEach(s -> {
-            s.setEvent(event);
-        });
-        return list;
-    }
 }

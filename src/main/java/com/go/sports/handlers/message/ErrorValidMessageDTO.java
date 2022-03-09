@@ -1,19 +1,15 @@
 package com.go.sports.handlers.message;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ErrorValidMessageDTO {
     private String field;
     private String message;
-
-    public ErrorValidMessageDTO(String field, String message) {
-        this.field = field;
-        this.message = message;
-    }
-
-    public ErrorValidMessageDTO() {
-    }
 }

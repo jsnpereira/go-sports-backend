@@ -21,18 +21,4 @@ public class CategoryPostDTO {
     @NotNull @NotEmpty
     private String eventId;
 
-    public CategoryPostDTO(Category category) {
-        this.id = category.getId();
-        this.title = category.getTitle();
-        this.description = category.getDescription();
-        this.eventId = category.getEvent().getId();
-    }
-
-    public CategoryPostDTO() {
-    }
-
-    public static List<CategoryPostDTO> converter(List<Category> categories){
-        return categories.stream().map(CategoryPostDTO::new).collect(Collectors.toList());
-    }
-
 }
