@@ -1,5 +1,16 @@
 # go-sports-backend
 
+
+OBS: this project will be broken and separed for each function. Because I studied about microservice architecture some course online.
+
+https://github.com/jsnpereira/ms-sports-category-backend
+https://github.com/jsnpereira/ms-sports-event-backend
+
+Missing:
+- Registration
+- User/Profile
+
+
 # Sonar
 First sonar must be run in docker, command below:
 ```
